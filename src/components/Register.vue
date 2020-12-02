@@ -2,8 +2,7 @@
   <Page>
     <FlexboxLayout class="page">
       <StackLayout class="form">
-        <Image class="logo" src="~/images/logo.png" />
-        <Label class="header" text="APP NAME" />
+     
 
         <StackLayout class="input-field" marginBottom="25">
           <TextField
@@ -62,30 +61,15 @@
           <StackLayout class="hr-light" />
         </StackLayout>
 
-        <StackLayout class="input-field">
-          <TextField
-            ref="country"
-            class="input"
-            hint="Country"
-            v-model="user.country"
-            returnKeyType="next"
-            fontSize="18"
-            @returnPress="focusCity"
+           <ListPicker
+            :items="countryList"
+            v-model="user.countrySelectedIndex"
           />
+          <ListPicker :items="cityList" v-model="user.citySelectedIndex" />
           <StackLayout class="hr-light" />
-        </StackLayout>
+     
+       
 
-        <StackLayout class="input-field">
-          <TextField
-            ref="city"
-            class="input"
-            hint="City"
-            v-model="user.city"
-            returnKeyType="done"
-            fontSize="18"
-          />
-          <StackLayout class="hr-light" />
-        </StackLayout>
 
         <Button
           text="Зарегистрироваться"
@@ -109,14 +93,13 @@ import Home from "./Home";
 export default {
   data() {
     return {
-      code: "",
       user: {
         name: "zfged1995",
         phone: "+380936204278",
         password: "12345",
         re_password: "12345",
-        country: "Ukraine",
-        city: "Kiev",
+        countrySelectedIndex: 0,
+        citySelectedIndex: 0,
       },
     };
   },
@@ -126,6 +109,21 @@ export default {
     },
     async submit() {
       await this.$store.dispatch("settings/startRegister", this.user);
+    },
+  },
+  async created() {
+    await this.$store.dispatch("settings/country");
+    console.log("this.country", this.country);
+  },
+
+  computed: {
+    countryList() {
+      return this.$store.state.settings.country.map((country) => country.name);
+    },
+    cityList() {
+      return this.$store.state.settings.country[
+        this.user.countrySelectedIndex
+      ].cities.map((city) => city.name);
     },
   },
 };

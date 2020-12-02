@@ -6,7 +6,8 @@ const settings = {
   namespaced: true,
   state: {
     user:null,
-    statusSendCode:null
+    statusSendCode:null,
+    country:null
   },
 
   actions: {
@@ -31,6 +32,10 @@ const settings = {
       const data = await authService.register(code)
       commit('setStatusSendCode',data)
     },
+    async country({commit}) {
+      const data = await authService.country()
+      commit('setCountry',data)
+    },
   },
 
   mutations: {
@@ -39,6 +44,9 @@ const settings = {
     },
     setStatusSendCode(state,statusSendCode){
       state.statusSendCode = statusSendCode
+    },
+    setCountry(state,country){
+      state.country = country
     }
   },
 }

@@ -6,7 +6,8 @@ const authService = {
   auth,
   getUserInfo,
   getConfirm,
-  register
+  register,
+  country
 };
 
 async function startRegister(user) {
@@ -59,6 +60,11 @@ async function register(code) {
   console.log(`http://makeweb.com.ua/api/ru/register?token=${token}`)
   const res = await axios.post(`http://makeweb.com.ua/api/ru/register?token=${token}`,formData)
   console.log(res.data)
+  return res.data
+}
+
+async function country() {
+  const res = await axios.get(`http://makeweb.com.ua/api/ru/countries`)
   return res.data
 }
 

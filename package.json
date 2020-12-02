@@ -13,7 +13,7 @@
     "nativescript-app-settings": "^1.0.0",
     "nativescript-masked-text-field": "^4.0.3",
     "nativescript-maskedinput": "0.0.3",
-    "nativescript-remote-builds": "^1.1.1",
+    "nativescript-remote-builds": "https://github.com/NativeScript/nativescript-remote-builds/tarball/master",
     "nativescript-secure-storage": "^2.6.2",
     "nativescript-socketio": "^3.3.1",
     "nativescript-toasty": "^3.0.0-alpha.2",
